@@ -1,0 +1,3 @@
+BOT_TOKEN = "8589639685:AAFH_EC5JcR_QjmwTqKcY_BsLOmdrXabe58"
+TON_WALLET = "UQAJf1fZ-MrGZSceE6Zt32f4vnaj0ZQ0knkLEPhLVf6CkgEa"
+WEBAPP_URL = "ПОКА_НЕ_ТРОГАЙ"
