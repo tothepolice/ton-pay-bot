@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Оплата</title>
+<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+<style>
+body {
+  background:#0f0f0f;
+  color:white;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.card {
+  background:#181818;
+  padding:24px;
+  border-radius:16px;
+  width:320px;
+  text-align:center;
+}
+button {
+  background:#0098EA;
+  color:white;
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  width:100%;
+  font-size:16px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Оплата подписки</h2>
+  <p id="price"></p>
+  <div id="ton-connect"></div><br>
+  <button onclick="pay()">Оплатить</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const amount = params.get("amount");
+
+document.getElementById("price").innerText = "Сумма: " + amount + " TON";
+
+const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+  manifestUrl: "WEBAPP_URL/tonconnect-manifest.json",
+  buttonRootId: "ton-connect"
+});
+
+async function pay() {
+  await tonConnectUI.sendTransaction({
+    validUntil: Math.floor(Date.now()/1000) + 300,
+    messages: [{
+      address: "TON_WALLET",
+      amount: (amount * 1e9).toString()
+    }]
+  });
+}
+</script>
+
+</body>
+</html>
